@@ -1,0 +1,39 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% load my_tags %}
+{% load my_filters %}
+{% block title %}
+NEWS&ARTICLE (Новости и статьи)
+{% endblock title %}
+
+{% block content %}
+<h1><font color="red">NEWS(NW)&ARTICLES(AR)</h1></font>
+<h1>Новости и статьи</h1>
+<h3><i>{% current_time '%d %b %Y' %}</i></h3>
+<h3><i>Количество новостей и статей:{{ news|length }}</i></h3>
+<h3> {{ next_post|default_if_none:"На данный момент, новостей больше нет" }} </h3>
+<hr>
+{% if news %}
+       <table>
+           <tr>
+               <td><b>Заголовок</b></td>
+               <td><b>Текст</b></td>
+               <td><b>Дата публикации</b></td>
+               <td><b>Категория публикации</b></td>
+           </tr>
+
+           {% for post in news %}
+           <tr>
+               <td align="left">{{ post.title|censor }}</td>
+               <td align="left">{{ post.text|censor|truncatechars:20 }}</td>
+               <td>{{ post.dateCreation|date:"d M Y" }}</td>
+               <td>{{ post.categoryType}}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Новостей нет!</h2>
+   {% endif %}
+{% endblock content %}
+

@@ -1,0 +1,29 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% load my_tags %}
+{% load my_filters %}
+{% block title %}
+NEWS&ARTICLE (Новости и статьи)
+{% endblock title %}
+
+{% block content %}
+<h1><font color="red">NEW(NW)&ARTICLE(AR)</h1></font>
+<h1>Публикация</h1>
+<h3><i>{% current_time '%d %b %Y' %}</i></h3>
+<hr>
+    <table>
+           <tr>
+               <td><b>Заголовок</b></td>
+               <td><b>Текст</b></td>
+               <td><b>Дата публикации</b></td>
+               <td><b>Категория публикации</b></td>
+           </tr>
+
+           <tr>
+               <td valign="top"><u>{{ new.title|censor }}</u></td>
+               <td><p align="justify">{{ new.text|censor }}</p></td>
+               <td valign="top">{{ new.dateCreation|date:"d M Y" }}</td>
+               <td valign="top">{{ new.categoryType }}</td>
+           </tr>
+       </table>
+{% endblock content %}
